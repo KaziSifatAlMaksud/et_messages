@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class ProfileInfo extends Model
 {
     use HasFactory;
+    protected $table = 'profile_info';
+    protected $fillable = ['user_id', 'image', 'address', 'phone', 'gender', 'country', 'bio', 'status'];
 }

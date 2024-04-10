@@ -23,7 +23,7 @@
                         <img class="w-[40px] rounded-[76px]" src="https://spruko.com/demo/tailwind/ynex/dist/assets/images/faces/11.jpg" alt="" />
 
                         <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-40 bg-white shadow-md rounded-lg p-2 mt-2 after:h-4 after:absolute after:-bottom-4 after:start-0 after:w-full before:h-4 before:absolute before:-top-4 before:start-0 before:w-full" aria-labelledby="hs-dropdown-default">
-                            <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-black-2 hover:bg-primary-20 focus:ring-2 focus:ring-blue-20   " href="#">
+                            <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-black-2 hover:bg-primary-20 focus:ring-2 focus:ring-blue-20   " href="{{route('profile.edit')}}">
                                 Profile
                             </a>
                             <form method="POST" action="{{ route('logout') }}" class="inline">
@@ -39,9 +39,12 @@
             </nav>
         </header>
 
+        {{$childUsers}}
+
+
+
         <!-- bannar section -->
         <section class="md:px-[30px] lg:px-[50px] 2xl:px-[120px] px-3 pt-6">
-
             <div class="w-full">
                 <div class="p-6 flex gap-6 rounded-[7px] shadow" style="
               background-image: url(./assets/images/profile_bannar.png);
@@ -97,9 +100,14 @@
                                         </svg>
                                     </button>
                                 </div>
+
+
                                 <div class="md:px-[70px] px-[20px] pb-[40px] overflow-y-auto">
                                     <div class="text-neutral-800 md:text-[28px] text-[18px] pb-6 text-center font-semibold leading-7">Add People</div>
-                                    <form action="#" class="self-stretch flex-col justify-start items-start gap-6 flex">
+                                    <form action="{{ route('createpeople') }}" method="post" class="self-stretch flex-col justify-start items-start gap-6 flex">
+
+                                        @csrf
+
                                         <div class="self-stretch flex-col justify-start items-start gap-3 flex">
                                             <div class="self-stretch justify-start items-start gap-3 inline-flex">
                                                 <div class="grow shrink basis-0 text-slate-700 md:text-base text-sm font-normal  capitalize leading-none">
@@ -107,7 +115,7 @@
                                                 </div>
                                             </div>
                                             <div class="self-stretch justify-start items-start gap-2 inline-flex">
-                                                <input type="text" id="input-name-label" class="py-3 px-4 block w-full border-gray-2 rounded-lg text-sm focus:border-blue-20 focus:ring-blue-20 disabled:opacity-50 disabled:pointer-events-none placeholder:text-sm " placeholder="Enter your name" />
+                                                <input type="text" name="name" id="input-name-label" class="py-3 px-4 block w-full border-gray-2 rounded-lg text-sm focus:border-blue-20 focus:ring-blue-20 disabled:opacity-50 disabled:pointer-events-none placeholder:text-sm " placeholder="Enter your name" />
                                             </div>
                                         </div>
                                         <div class="self-stretch flex-col justify-start items-start gap-3 flex">
@@ -117,7 +125,7 @@
                                                 </div>
                                             </div>
                                             <div class="self-stretch justify-start items-start gap-2 inline-flex">
-                                                <input type="email" id="input-email-label" class="py-3 px-4 block w-full border-gray-2 rounded-lg text-sm focus:border-blue-20 focus:ring-blue-20 disabled:opacity-50 disabled:pointer-events-none placeholder:text-sm   " placeholder="Enter your mail" />
+                                                <input type="email" name="email" id="input-email-label" class="py-3 px-4 block w-full border-gray-2 rounded-lg text-sm focus:border-blue-20 focus:ring-blue-20 disabled:opacity-50 disabled:pointer-events-none placeholder:text-sm   " placeholder="Enter your mail" />
                                             </div>
                                         </div>
                                         <div class="self-stretch flex-col justify-start items-start gap-3 flex">
@@ -129,7 +137,7 @@
                                             <div class="self-stretch flex-col justify-start items-start gap-2 flex">
                                                 <div class="self-stretch  rounded-lg justify-start items-center gap-[5px] inline-flex">
 
-                                                    <input type="password" id="input-password-label" class="py-3 px-4 block w-full border-gray-2 rounded-lg text-sm focus:border-blue-20 focus:ring-blue-20 disabled:opacity-50 disabled:pointer-events-none   placeholder:text-sm   " placeholder="Enter your password" />
+                                                    <input type="password" name="password" id="input-password-label" class="py-3 px-4 block w-full border-gray-2 rounded-lg text-sm focus:border-blue-20 focus:ring-blue-20 disabled:opacity-50 disabled:pointer-events-none   placeholder:text-sm   " placeholder="Enter your password" />
                                                 </div>
                                             </div>
                                         </div>
@@ -224,7 +232,28 @@
                     </div>
                 </div>
             </div>
+
+            @if(session('success'))
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-6" id="successAlert" role="alert">
+
+                <strong class="font-bold">Success!</strong>
+                <span class="block sm:inline">People is successfully Created.</span>
+                <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                    <svg onclick="closeAlert()" class="fill-current h-6 w-6 text-green-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+
+                        <title>Close</title>
+                        <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+                    </svg>
+                </span>
+            </div>
+
+            @endif
+
+
         </section>
+
+
+
 
         <!-- user card section -->
         <section id="container" class="md:px-[30px] lg:px-[50px] 2xl:px-[120px] px-3 ">
@@ -684,4 +713,10 @@
     </main>
 </body>
 
+<script>
+    function closeAlert() {
+        document.getElementById('successAlert').style.display = 'none';
+    }
+
+</script>
 </html>
