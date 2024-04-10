@@ -39,10 +39,6 @@
             </nav>
         </header>
 
-        {{$childUsers}}
-
-
-
         <!-- bannar section -->
         <section class="md:px-[30px] lg:px-[50px] 2xl:px-[120px] px-3 pt-6">
             <div class="w-full">
@@ -153,69 +149,6 @@
                             </div>
                         </div>
                     </div>
-
-
-                    <div id="hs-basic-modal" class="hs-overlay hs-overlay-open:opacity-100 hs-overlay-open:duration-500 hidden size-full fixed top-56 start-0 z-[80] opacity-0 overflow-x-hidden transition-all overflow-y-auto pointer-events-none">
-                        <div class="hs-overlay-open:opacity-100 hs-overlay-open:duration-500 opacity-0 transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
-                            <div class="flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto  ">
-                                <div class="flex justify-between items-center pt-3 px-4 ">
-                                    <h3 class="font-bold text-gray-800 ">
-                                    </h3>
-                                    <button type="button" class="flex justify-center items-center size-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none  " data-hs-overlay="#hs-basic-modal">
-                                        <span class="sr-only">Close</span>
-                                        <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M18 6 6 18" />
-                                            <path d="m6 6 12 12" /></svg>
-                                    </button>
-                                </div>
-                                <div class="px-[70px] pt-[20px] pb-[70px] overflow-y-auto">
-                                    <div class="text-neutral-800 text-[28px] pb-6 text-center font-semibold leading-7">Add People</div>
-                                    <form action="#" class="self-stretch flex-col justify-start items-start gap-6 flex">
-                                        <div class="self-stretch flex-col justify-start items-start gap-3 flex">
-                                            <div class="self-stretch justify-start items-start gap-3 inline-flex">
-                                                <div class="grow shrink basis-0 text-slate-700 md:text-base text-sm font-normal  capitalize leading-none">
-                                                    Name
-                                                </div>
-                                            </div>
-                                            <div class="self-stretch justify-start items-start gap-2 inline-flex">
-                                                <input type="text" id="input-name-label" class="py-3 px-4 block w-full border-gray-2 rounded-lg text-sm focus:border-blue-20 focus:ring-blue-20 disabled:opacity-50 disabled:pointer-events-none placeholder:text-sm   " placeholder="Enter your name" />
-                                            </div>
-                                        </div>
-                                        <div class="self-stretch flex-col justify-start items-start gap-3 flex">
-                                            <div class="self-stretch justify-start items-start gap-3 inline-flex">
-                                                <div class="grow shrink basis-0 text-slate-700 md:text-base text-sm font-normal  capitalize leading-none">
-                                                    Email
-                                                </div>
-                                            </div>
-                                            <div class="self-stretch justify-start items-start gap-2 inline-flex">
-                                                <input type="email" id="input-email-label" class="py-3 px-4 block w-full border-gray-2 rounded-lg text-sm focus:border-blue-20 focus:ring-blue-20 disabled:opacity-50 disabled:pointer-events-none placeholder:text-sm   " placeholder="Enter your mail" />
-                                            </div>
-                                        </div>
-                                        <div class="self-stretch flex-col justify-start items-start gap-3 flex">
-                                            <div class="self-stretch justify-start items-start inline-flex">
-                                                <div class="grow shrink basis-0 text-slate-700 md:text-base text-sm font-normal  capitalize leading-none">
-                                                    New Password
-                                                </div>
-                                            </div>
-                                            <div class="self-stretch flex-col justify-start items-start gap-2 flex">
-                                                <div class="self-stretch  rounded-lg justify-start items-center gap-[5px] inline-flex">
-
-                                                    <input type="password" id="input-password-label" class="py-3 px-4 block w-full border-gray-2 rounded-lg text-sm focus:border-blue-20 focus:ring-blue-20 disabled:opacity-50 disabled:pointer-events-none   " placeholder:text-sm placeholder="Enter your password" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="self-stretch pt-3">
-                                            <button type="submit" class="btn-primary w-full">
-                                                ADD
-                                            </button>
-                                        </div>
-
-                                    </form>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div>
                     <div class="relative flex rounded-lg shadow-sm">
@@ -258,7 +191,11 @@
         <!-- user card section -->
         <section id="container" class="md:px-[30px] lg:px-[50px] 2xl:px-[120px] px-3 ">
             <div class="grid 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-6">
-                <a class="w-full flex flex-col bg-white shadow-sm rounded-lg hover:shadow-lg transition " href="user.html">
+                @if(!empty($childUsers))
+                @foreach($childUsers as $childUser )
+
+                <a class="w-full flex flex-col bg-white shadow-sm rounded-lg hover:shadow-lg transition " href="/people_profile/{{$childUser->id}}">
+
                     <div class="relative">
                         <img src="https://spruko.com/demo/tailwind/ynex/dist/assets/images/media/team-covers/1.jpg" class="w-full h-[100px] relative bg-blue-700 bg-opacity-20 rounded-tl-lg rounded-tr-lg" alt="" />
                         <span class="absolute pt-[71px] px-[20px] top-0 left-0">
@@ -271,12 +208,16 @@
                         <div class="w-fit pl-[92px] pt-[10px] flex-col justify-start items-start inline-flex">
                             <div class=" h-6 justify-start items-center inline-flex">
                                 <div class="w-fit h-6 text-zinc-800 text-base font-semibold font-['Inter'] leading-normal">
-                                    Alexander Smith
+                                    {{$childUser &&  $childUser->name ? $childUser->name : ''  }}
+
+
+
                                 </div>
                             </div>
                             <div class="self-stretch h-[18px] justify-start items-center inline-flex">
                                 <div class="w-fit h-[18px] text-neutral-400 text-xs font-normal font-['Inter'] leading-[18px]">
-                                    alexandersmith2135@gmail.com
+                                    {{$childUser &&  $childUser->email ? $childUser->email : ''  }}
+
                                 </div>
                             </div>
                         </div>
@@ -300,14 +241,24 @@
                         </div>
                         <div class="text-center w-[33%] py-4">
                             <p class="text-[13px] text-zinc-800 font-semibold leading-tight">
-                                Posts
+                                Creation Date
+
                             </p>
                             <p class="text-neutral-400 text-xs font-normal leading-[18px]">
-                                7
+                                24/06/2024
                             </p>
                         </div>
                     </div>
                 </a>
+
+
+                @endforeach
+                @else
+                <p>Noting is abilable there ..</p>
+                @endif
+
+
+
                 <a class="w-full flex flex-col bg-white shadow-sm rounded-lg hover:shadow-lg transition " href="#">
                     <div class="relative">
                         <img src="https://spruko.com/demo/tailwind/ynex/dist/assets/images/media/team-covers/2.jpg" class="w-full h-[100px] relative bg-blue-700 bg-opacity-20 rounded-tl-lg rounded-tr-lg" alt="..." />

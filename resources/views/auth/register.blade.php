@@ -67,15 +67,24 @@
 
                                     </div>
                                 </div>
+
+                            </div>
+
+                            <div class="self-stretch flex-col justify-start items-start gap-3 flex">
+                                <div class="self-stretch justify-start items-start inline-flex">
+                                    <div class="grow shrink basis-0 text-slate-700 md:text-[16px] text-[14px] font-normal  capitalize leading-none">
+                                        Confirm Password
+                                    </div>
+                                </div>
                                 <div class="self-stretch flex-col justify-start items-start gap-2 flex">
                                     <div class="self-stretch  rounded-lg justify-start items-center gap-[5px] inline-flex">
 
-                                        <input type="password" id="input-password-label" name="password_confirmation" class="input_custom" placeholder="Enter your password" />
-
+                                        <input type="password" id="input-password-label" name="password_confirmation" class="input_custom" placeholder="Enter your confirm password" />
                                     </div>
                                 </div>
-
                             </div>
+
+
                             <div class="self-stretch pt-3">
                                 <button type="submit" class="btn-primary w-full">
                                     Create Account
@@ -91,7 +100,7 @@
                             </div>
                             <div class="self-stretch pt-3">
                                 <div class="flex gap-2 justify-center md:text-[16px] text-[14px]">
-                                    <p>Already have an account?</p> <a href="login.html" class="text-primary underline">Login</a>
+                                    <p>Already have an account?</p> <a href="{{route('login')}}" class="text-primary underline">Login</a>
                                 </div>
                             </div>
                         </div>

@@ -69,7 +69,8 @@
                         </div>
                         <div class="self-stretch pt-3">
                             <div class="flex gap-2 md:text-[16px] text-[14px] justify-center">
-                                <p>Don't have an account?</p> <a href="signUp.html" class="text-primary underline">SignUp</a>
+                                <p>Don't have an account?</p> <a href="{{route('register')}}" class="text-primary underline">SignUp</a>
+
                             </div>
                         </div>
                     </div>

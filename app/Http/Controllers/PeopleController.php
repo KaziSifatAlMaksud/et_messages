@@ -36,4 +36,13 @@ class PeopleController extends Controller
 
         return redirect()->route('dashboard')->with('success', 'Person added successfully!');
     }
+
+    public function show($id)
+    {
+        $childUser = ChildUser::find($id); // Assuming you have a 'users' table
+        if (!$childUser) {
+            return response()->json(['error' => 'User not found'], 404);
+        }
+        return view('child_profile', ['childUser' => $childUser]);
+    }
 }
